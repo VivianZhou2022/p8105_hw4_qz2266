@@ -1,0 +1,82 @@
+---
+title: "NY NOAA Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(viridis)
+library(plotly)
+library(lubridate)
+library(dplyr)
+library(p8105.datasets)
+```
+
+```{r, include=FALSE}
+set.seed(1)
+
+data(ny_noaa)
+ny_noaa <- ny_noaa %>% 
+  mutate(
+  year = lubridate::year(date),
+  month = lubridate::month(date),
+  day = lubridate::day(date),
+  prcp = prcp/10,
+  tmin = as.numeric(tmin)/10,
+  tmax = as.numeric(tmax)/10
+  ) %>% 
+  rename(tmax_ºC = tmax, tmin_ºC = tmin, prcp_mm = prcp , snow_mm = snow, snwd_mm = snwd) %>% 
+  select(id, year, month, day, prcp_mm, snow_mm, snwd_mm, tmax_ºC, tmin_ºC)
+
+ny_noaa %>% 
+  sample_n(1000)
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+ny_noaa %>% 
+  mutate(
+    year = as.numeric(year)) %>%
+  group_by(id, year) %>%
+  summarize(mean_snwf = mean(snow_mm), mean_snwd = mean(snwd_mm)) %>% 
+  plot_ly(x = ~mean_snwf, y = ~mean_snwd, type = "scatter", mode = "markers", alpha = 0.5,color = ~year)
+
+```
+
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+ny_noaa  %>%
+   mutate(
+    year = as.factor(year)) %>%
+  group_by(id, year) %>%
+  summarize(avg_tmin = mean(tmin_ºC)) %>%
+  plot_ly(x = ~year, y = ~avg_tmin, type = "box", 
+          alpha = .5,color = ~year, colors = "viridis")
+```
+
+### Chart C
+
+```{r}
+ny_noaa %>% 
+  drop_na(year) %>%
+  filter(prcp_mm != "NA" | snow_mm != "NA" | snwd_mm != "NA" | tmax_ºC != "NA" | tmin_ºC != "NA") %>%
+  mutate(
+    year = as.factor(year)) %>%
+  count(year) %>% 
+  mutate(year = fct_reorder(year, n)) %>% 
+  plot_ly(x = ~year, y = ~n, color = ~year, type = "bar")
+```
+
