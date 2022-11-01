@@ -1,0 +1,44 @@
+---
+title: "Resume"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+
+<br>
+
+### Education
+
+
+**Columbia University Mailman School of Public Health**, New York, NY.
+
+Master of Biostatistics
+
+**Tsinghua University**, Beijing, China.
+
+PHD in Pharmacology 
+
+<br>
+
+### Work Experience
+
+
+**Columbia University Irving Medical Center**, New York, NY.
+
+Associate Research Scientist
+
+<br>
+
+### Professional Interests
+
+
+The application of Biostatistics and Data Science in the research of:
+
+
+•	Novel anti-cancer therapies
+
+•	DNA damage and repair
+
+•	Genome stability
