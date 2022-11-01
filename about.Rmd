@@ -1,0 +1,30 @@
+---
+title: "About me"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+<br>
+
+### Basics
+
+My name is Qing Zhou, a second-year Biostatistics MS student on the Public Health Data Science track, and an associate research scientist working at CUIMC in the Department of Pathology and Cell Biology. 
+
+<center><img src="images/mailman.PNG" style="width:45%">
+
+
+<br>
+
+### Professional 
+
+My interests are in the application of biostatistics and data science in cancer research, especially in the discovery of novel cancer therapeutics.
+
+You can find my resume [here](resume.html).
+
+<br>
+
+### Personal
+
+In my free time, I enjoy reading, traveling, swimming, salsa dancing, and watching movies/shows.
